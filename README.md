@@ -6,12 +6,12 @@ A fairly simple library that implements the classic parse and stringify methods,
 
 ## Install
 
-    $ npm install parse-stringify
+    $ npm install qstool
 
 ```js
-let parseStringify = require("parse-stringify");
+let qstool = require("qstool");
 
-let string = parseStringify.stringify({ key1: "value1", key2: "value2" }); // '{"key1":"value1","key2":"value2"}'
+let string = qstool.stringify({ key1: "value1", key2: "value2" }); // '{"key1":"value1","key2":"value2"}'
 
-let json = parseStringify.parse('{"key1":"value1","key2":"value2"}'); // { key1: 'value1', key2: 'value2' }
+let json = qstool.parse('{"key1":"value1","key2":"value2"}'); // { key1: 'value1', key2: 'value2' }
 ```
