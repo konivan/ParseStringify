@@ -1,4 +1,4 @@
-Simple and non-recursive JSON parse/stringify library.
+A small library for JSON parse/stringify based on loops.
 
 ## Description
 
