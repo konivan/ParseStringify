@@ -6,12 +6,12 @@ A fairly simple library that implements the classic parse and stringify methods,
 
 ## Install
 
-    $ npm install qstool
+    $ npm install simple-parse
 
 ```js
-let qstool = require("qstool");
+let simpleParse = require("simple-parse");
 
-let string = qstool.stringify({ key1: "value1", key2: "value2" }); // '{"key1":"value1","key2":"value2"}'
+let string = simpleParse.stringify({ key1: "value1", key2: "value2" }); // '{"key1":"value1","key2":"value2"}'
 
-let json = qstool.parse('{"key1":"value1","key2":"value2"}'); // { key1: 'value1', key2: 'value2' }
+let json = simpleParse.parse('{"key1":"value1","key2":"value2"}'); // { key1: 'value1', key2: 'value2' }
 ```
