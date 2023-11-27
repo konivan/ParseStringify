@@ -5,9 +5,9 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/konivan/simple-parse"
+        "url": "https://github.com/konivan/simpleParse"
     },
-    "homepage": "https://github.com/konivan/simple-parse",
+    "homepage": "https://github.com/konivan/simpleParse",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
