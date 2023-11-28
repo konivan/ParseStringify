@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Classic stringify/parse functions.
+ * Works like a classic stringify method.
  */
 exports.stringify = function stringify(input) {
   let queue = [];
@@ -48,6 +48,9 @@ exports.stringify = function stringify(input) {
   return res;
 };
 
+/**
+ * Works like a classic parse method.
+ */
 exports.parse = function (str) {
   const stack = [];
   const metaStack = [];
@@ -158,6 +161,58 @@ exports.parse = function (str) {
     }
   }
 };
+
+/**
+ * Accept a query string and return object
+ */
+exports.queryParse = function queryParse(query) {
+  let parser = /([^=?#&]+)=?([^&]*)/g;
+  let part;
+  const result = {};
+
+  while (part = parser.exec(query)) {
+
+    let key = decodeURIComponent(part[1].replace(/\+/g, ' ')) || null;
+    let value = decodeURIComponent(part[2].replace(/\+/g, ' ')) || null;
+
+    if (key === null || value === null || key in result) {
+      continue;
+    }
+    result[key] = value;
+  }
+
+  return result;
+}
+
+/**
+ * Accept a object with an optional prefix and return query string
+ */
+exports.queryStringify = function queryStringify(obj, prefix) {
+    prefix = prefix || '';
+  
+    const pairs = [];
+    let value;
+    let key;
+  
+    for (key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        value = obj[key];
+  
+        if (!value && (value === null || value === 'undefined' || isNaN(value))) {
+          value = '';
+        }
+        key = encodeURIComponent(key) || null;
+        value = encodeURIComponent(value) || null;
+  
+        if (key === null || value === null) {
+            continue
+        };
+        pairs.push(`${key}=${value}`);
+      }
+    }
+  
+    return pairs.length ? prefix + pairs.join('&') : '';
+}
 
 // a pop function for the parse function.
 function pop(obj, stack, metaStack) {
