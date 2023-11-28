@@ -1,6 +1,6 @@
 {
     "name": "simple-parse",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "A library for use JSON.stringify and JSON.parse based on loops and encode, decode query strings",
     "main": "index.js",
     "repository": {
