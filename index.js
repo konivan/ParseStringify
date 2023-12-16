@@ -4,11 +4,11 @@
  * Works like a classic stringify method.
  */
 exports.stringify = function stringify(input) {
-  let queue = [];
+  var queue = [];
   queue.push({ obj: input });
 
-  let res = "";
-  let next, obj, prefix, val, i, arrayPrefix, keys, k, key, value, objPrefix;
+  var res = "";
+  var next, obj, prefix, val, i, arrayPrefix, keys, k, key, value, objPrefix;
   while ((next = queue.pop())) {
     obj = next.obj;
     prefix = next.prefix || "";
@@ -52,12 +52,12 @@ exports.stringify = function stringify(input) {
  * Works like a classic parse method.
  */
 exports.parse = function (str) {
-  const stack = [];
-  const metaStack = [];
-  let i = 0;
+  var stack = [];
+  var metaStack = [];
+  var i = 0;
 
   while (true) {
-    let collationIndex = str[i++];
+    var collationIndex = str[i++];
 
     if (
       collationIndex === "}" ||
@@ -106,10 +106,10 @@ exports.parse = function (str) {
       case "8":
       case "9":
       case "-":
-        let parsedNum = "";
+        var parsedNum = "";
         i--;
         while (true) {
-          const numChar = str[i++];
+          var numChar = str[i++];
           if (/[\d\.\-e\+]/.test(numChar)) {
             parsedNum += numChar;
           } else {
@@ -121,11 +121,11 @@ exports.parse = function (str) {
         break;
 
       case '"':
-        let parsedString = "";
-        let lastCh;
-        let numConsecutiveSlashes = 0;
+        var parsedString = "";
+        var lastCh;
+        var numConsecutiveSlashes = 0;
         while (true) {
-          const ch = str[i++];
+          var ch = str[i++];
           if (
             ch !== '"' ||
             (lastCh === "\\" && numConsecutiveSlashes % 2 === 1)
@@ -145,13 +145,13 @@ exports.parse = function (str) {
         break;
 
       case "[":
-        const arrayElement = { element: [], index: stack.length };
+        var arrayElement = { element: [], index: stack.length };
         stack.push(arrayElement.element);
         metaStack.push(arrayElement);
         break;
 
       case "{":
-        const objElement = { element: {}, index: stack.length };
+        var objElement = { element: {}, index: stack.length };
         stack.push(objElement.element);
         metaStack.push(objElement);
         break;
@@ -166,14 +166,14 @@ exports.parse = function (str) {
  * Accept a query string and return object
  */
 exports.queryParse = function queryParse(query) {
-  let parser = /([^=?#&]+)=?([^&]*)/g;
-  let part;
-  const result = {};
+  var parser = /([^=?#&]+)=?([^&]*)/g;
+  var part;
+  var result = {};
 
   while (part = parser.exec(query)) {
 
-    let key = decodeURIComponent(part[1].replace(/\+/g, ' ')) || null;
-    let value = decodeURIComponent(part[2].replace(/\+/g, ' ')) || null;
+    var key = decodeURIComponent(part[1].replace(/\+/g, ' ')) || null;
+    var value = decodeURIComponent(part[2].replace(/\+/g, ' ')) || null;
 
     if (key === null || value === null || key in result) {
       continue;
@@ -190,9 +190,9 @@ exports.queryParse = function queryParse(query) {
 exports.queryStringify = function queryStringify(obj, prefix) {
     prefix = prefix || '';
   
-    const pairs = [];
-    let value;
-    let key;
+    var pairs = [];
+    var value;
+    var key;
   
     for (key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -216,18 +216,18 @@ exports.queryStringify = function queryStringify(obj, prefix) {
 
 // a pop function for the parse function.
 function pop(obj, stack, metaStack) {
-  const lastMetaElement = metaStack.pop();
+  var lastMetaElement = metaStack.pop();
 
   if (obj !== lastMetaElement.element) {
     metaStack.push(lastMetaElement);
   }
 
-  const { element, index } = metaStack[metaStack.length - 1];
+  var { element, index } = metaStack[metaStack.length - 1];
 
   if (Array.isArray(element)) {
     element.push(obj);
   } else if (index === stack.length - 2) {
-    const key = stack.pop();
+    var key = stack.pop();
     element[key] = obj;
   } else {
     stack.push(obj);
